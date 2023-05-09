@@ -35,7 +35,7 @@ describe('Test with backend', () => {
     });
   });
 
-  it.only('intercepting and modifying the request and response', () => {
+  it('intercepting and modifying the request and response', () => {
 
     /*    cy.intercept('POST', 'https://api.realworld.io/api/articles/', (req) => {
           req.body.article.description = 'This is a description 2';
@@ -97,6 +97,66 @@ describe('Test with backend', () => {
     });
 
     cy.get('app-article-list button').eq(1).click().should('contain', '6');
+  });
+
+  it('delete a new article in a global feed', () => {
+
+    // user credentials are needed, in order to post a new article
+    const userCredentials = {
+      'user': {
+        'email': 'artem.bondar16@gmail.com',
+        'password': 'CypressTest1'
+      }
+    };
+
+    // providing all the data to create new article
+    const bodyRequest = {
+      'article': {
+        'title': 'blabliblub',
+        'description': 'nothing',
+        'body': '...really',
+        'tagList': []
+      }
+    };
+
+    // posting a new article via cypress
+    cy.request('POST', 'https://conduit.productionready.io/api/users/login', userCredentials)
+      .its('body').then(body => {
+      const token = body.user.token;
+
+      cy.request({
+        url: 'https://conduit.productionready.io/api/articles/',
+        headers: {'Authorization': 'Token ' + token},
+        method: 'POST',
+        body: bodyRequest,
+      }).then(response => {
+        expect(response.status).to.equal(200);
+      });
+
+      // UI action to delete newly created article
+      cy.contains('Global Feed').click();
+      cy.get('.article-preview').first().click();
+      cy.get('.article-actions').contains('Delete Article').click();
+
+      // verify that the article created by cypress was successfully deleted
+      cy.request({
+        url: 'https://conduit.productionready.io/api/articles?limit=10&offset=0',
+        headers: {'Authorization': 'Token ' + token},
+        method: 'GET',
+      }).its('body').then(body => {
+        console.log(body);
+        expect(body.articles[0].title).not.to.equal('blabliblub');
+      });
+
+      // UI action to delete articles which were created in cypress test "verify correct request and response"
+      cy.contains('Global Feed').click();
+      cy.get('h1').contains('This is the super cool title').click();
+      cy.get('.article-actions').contains('Delete Article').click();
+
+      cy.contains('Global Feed').click();
+      cy.get('h1').contains('This is a lame title 1').click();
+      cy.get('.article-actions').contains('Delete Article').click();
+    });
   });
 
 });
