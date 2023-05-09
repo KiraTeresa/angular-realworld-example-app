@@ -37,9 +37,9 @@ describe('Test with backend', () => {
 
   it.only('intercepting and modifying the request and response', () => {
 
-/*    cy.intercept('POST', 'https://api.realworld.io/api/articles/', (req) => {
-      req.body.article.description = 'This is a description 2';
-    }).as('postArticles');*/
+    /*    cy.intercept('POST', 'https://api.realworld.io/api/articles/', (req) => {
+          req.body.article.description = 'This is a description 2';
+        }).as('postArticles');*/
 
     cy.intercept('POST', 'https://api.realworld.io/api/articles/', (req) => {
       req.reply(res => {
@@ -98,4 +98,5 @@ describe('Test with backend', () => {
 
     cy.get('app-article-list button').eq(1).click().should('contain', '6');
   });
+
 });
