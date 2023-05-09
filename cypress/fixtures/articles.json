@@ -1,0 +1,41 @@
+{
+  "articles": [
+    {
+      "slug": "This-is-the-cool-title-1850",
+      "title": "Title 1",
+      "description": "This is a description",
+      "body": "This is a body of the article",
+      "tagList": [],
+      "createdAt": "2023-05-09T07:37:40.440Z",
+      "updatedAt": "2023-05-09T07:37:40.440Z",
+      "favorited": false,
+      "favoritesCount": 1,
+      "author": {
+        "username": "CyTestUser",
+        "bio": "2222",
+        "image": "https://i.stack.imgur.com/34AD2.jpg",
+        "following": false
+      }
+    },
+    {
+      "slug": "Hello-World-1850",
+      "title": "Title 2",
+      "description": "This is a description",
+      "body": "This is a body of the article",
+      "tagList": [
+        "body"
+      ],
+      "createdAt": "2023-05-08T15:03:59.406Z",
+      "updatedAt": "2023-05-08T15:03:59.406Z",
+      "favorited": false,
+      "favoritesCount": 5,
+      "author": {
+        "username": "CyTestUser",
+        "bio": "2222",
+        "image": "https://i.stack.imgur.com/34AD2.jpg",
+        "following": false
+      }
+    }
+  ],
+  "articlesCount": 2
+}
