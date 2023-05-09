@@ -101,14 +101,6 @@ describe('Test with backend', () => {
 
   it('delete a new article in a global feed', () => {
 
-    // user credentials are needed, in order to post a new article
-    const userCredentials = {
-      'user': {
-        'email': 'artem.bondar16@gmail.com',
-        'password': 'CypressTest1'
-      }
-    };
-
     // providing all the data to create new article
     const bodyRequest = {
       'article': {
@@ -120,9 +112,7 @@ describe('Test with backend', () => {
     };
 
     // posting a new article via cypress
-    cy.request('POST', 'https://conduit.productionready.io/api/users/login', userCredentials)
-      .its('body').then(body => {
-      const token = body.user.token;
+    cy.get('@token').then(token => {
 
       cy.request({
         url: 'https://conduit.productionready.io/api/articles/',
