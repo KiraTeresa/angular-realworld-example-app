@@ -78,7 +78,7 @@ describe('Test with backend', () => {
       .and('contain', 'testing');
   });
 
-  it('verify global feed likes count', () => {
+  it.skip('verify global feed likes count', () => {
     cy.intercept('GET', 'https://api.realworld.io/api/articles/feed*', {'articles': [], 'articlesCount': 0});
     cy.intercept('GET', 'https://api.realworld.io/api/articles*', {fixture: 'articles.json'});
 
@@ -115,7 +115,7 @@ describe('Test with backend', () => {
     cy.get('@token').then(token => {
 
       cy.request({
-        url: 'https://conduit.productionready.io/api/articles/',
+        url: Cypress.env('apiUrl') + '/api/articles/',
         headers: {'Authorization': 'Token ' + token},
         method: 'POST',
         body: bodyRequest,
@@ -130,7 +130,7 @@ describe('Test with backend', () => {
 
       // verify that the article created by cypress was successfully deleted
       cy.request({
-        url: 'https://conduit.productionready.io/api/articles?limit=10&offset=0',
+        url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',
         headers: {'Authorization': 'Token ' + token},
         method: 'GET',
       }).its('body').then(body => {

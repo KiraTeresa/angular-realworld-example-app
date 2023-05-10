@@ -43,3 +43,6 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# cypress env
+cypress.env.json
