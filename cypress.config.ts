@@ -5,13 +5,21 @@ export default defineConfig({
   viewportWidth: 1920,
   video: false,
   env: {
-    username: 'artem.bondar16@gmail.com',
-    password: 'CypressTest1',
+    username: '',
+    password: '',
     apiUrl: 'https://api.realworld.io'
   },
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      const username = process.env.DB_USERNAME;
+      const password = process.env.DB_PASSWORD;
+
+      if (!password) {
+        throw new Error('missing DB_PASSWORD environment variable');
+      }
+
+      config.env = {username, password};
+      return config
     },
     baseUrl: 'http://localhost:4200',
   },

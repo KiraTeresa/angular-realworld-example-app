@@ -78,11 +78,12 @@ describe('Test with backend', () => {
       .and('contain', 'testing');
   });
 
-  it.skip('verify global feed likes count', () => {
+  it('verify global feed likes count', () => {
     cy.intercept('GET', 'https://api.realworld.io/api/articles/feed*', {'articles': [], 'articlesCount': 0});
     cy.intercept('GET', 'https://api.realworld.io/api/articles*', {fixture: 'articles.json'});
 
     cy.contains('Global Feed').click();
+    cy.wait(500);
 
     cy.get('app-article-list button')
       .then(heartList => {

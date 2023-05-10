@@ -10,7 +10,10 @@
     "lint": "ng lint --force",
     "e2e": "ng e2e",
     "cypress:run": "npx cypress run",
-    "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run"
+    "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
+
+    "cy:open_dev": "npx cypress open --env username=artem.bondar16@gmail.com,password=CypressTest1",
+    "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$DB_PASSWORD"
   },
   "engines": {
     "node": "^14.20.0 || ^16.13.0 || ^18.10.0"
