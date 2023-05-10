@@ -9,6 +9,11 @@ export default defineConfig({
     password: '',
     apiUrl: 'https://api.realworld.io'
   },
+  retries: {
+    runMode: 2,
+    openMode: 0
+  },
+
   e2e: {
     setupNodeEvents(on, config) {
       const username = process.env.DB_USERNAME;
