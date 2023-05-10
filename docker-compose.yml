@@ -1,0 +1,10 @@
+version: '4.18'
+services:
+   cypress:
+     image: cypress_compose
+     build:
+       context: .
+       dockerfile: ./Dockerfile
+     volumes:
+       - ./dockerReports/:/app/cypress/results
+       - ./dockerReports/:/app/mochawesome-report
