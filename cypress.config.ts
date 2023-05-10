@@ -14,12 +14,12 @@ export default defineConfig({
       const username = process.env.DB_USERNAME;
       const password = process.env.DB_PASSWORD;
 
-      if (!password) {
+ /*     if (!password) {
         throw new Error('missing DB_PASSWORD environment variable');
-      }
+      }*/
 
       config.env = {username, password};
-      return config
+      return config;
     },
     baseUrl: 'http://localhost:4200',
   },
